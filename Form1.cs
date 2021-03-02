@@ -17,6 +17,14 @@ namespace FNFLoader_v1
         {
             InitializeComponent();
             listBox1.Items.Clear();
+            try
+            {
+                Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "mods"));
+            }
+            catch (Exception ex)
+            {
+                
+            }
             string[] dirs = Directory.GetDirectories(Path.Combine(Environment.CurrentDirectory, "mods"), "*", SearchOption.TopDirectoryOnly);
             for (int i = 0; i <= dirs.Length - 1; i++)
             {
@@ -30,7 +38,7 @@ namespace FNFLoader_v1
             if(listBox1.SelectedIndex != -1)
             {
                 string fnf_path = read_ini();
-                if (File.Exists(fnf_path))
+                if (!File.Exists(fnf_path) && fnf_path != "")
                 {
                     string selectedItem = listBox1.Items[listBox1.SelectedIndex].ToString();
                     DirectoryCopy(Path.Combine(Environment.CurrentDirectory, "mods", selectedItem, "assets"), Path.Combine(fnf_path, "assets"), true);
@@ -107,6 +115,14 @@ namespace FNFLoader_v1
         }
         private string read_ini()
         {
+            try
+            {
+                System.IO.File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "fnf_path.ini"));
+            }
+            catch(Exception e)
+            {
+                return "";
+            }
             string text = System.IO.File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "fnf_path.ini"));
             return text.Split('=')[1];
         }
