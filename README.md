@@ -1,5 +1,5 @@
 # FNFLoader
-A mod organizer/loader for Friday Night Funkin
+A mod asset organizer/loader for Friday Night Funkin
 
 ## Building
 Open the project files in visual studio and compile, no dependencies needed
